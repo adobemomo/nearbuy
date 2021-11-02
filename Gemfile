@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.6.6'
 
 gem 'puma'
-gem 'rails', '4.2.11'
+gem 'rails', '5.0.5'
 
 gem 'bootstrap-sass'
 gem 'coffee-rails'
