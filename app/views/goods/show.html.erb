@@ -1,0 +1,24 @@
+<div class="row-fluid">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="row">
+      <h2><%= @good.name %></h2>
+      <p><%= @good.address %></p>
+      <p>Latitude: <%= @good.latitude %></p>
+      <p>Longitude: <%= @good.longitude %></p>
+
+      <%= link_to "Edit", edit_good_path(@good), class: "btn btn-primary" %>
+      or
+      <%= link_to "get batck to list", goods_path %>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?center=#{@good.latitude},#{@good.longitude}&zoom=14&size=640x400&markers=color:black%7C#{@good.latitude},#{@good.longitude}" %>
+    </div>
+
+  </div>
+
+</div>
+
+
