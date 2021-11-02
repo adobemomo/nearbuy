@@ -18,6 +18,10 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-underscore'
 end
 
+group :development, :test do
+  gem 'sqlite3', '~> 1.3.11'
+end
+
 group :production do
   gem 'pg', '~> 0.15' # for Heroku deployment
   gem 'rails_12factor'
