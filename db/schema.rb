@@ -10,18 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140523131531) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20211103183152) do
 
   create_table "goods", force: :cascade do |t|
+    t.integer  "user_id"
     t.string   "name"
     t.string   "address"
     t.datetime "create_time"
     t.datetime "update_time"
     t.float    "latitude"
     t.float    "longitude"
+    t.index ["user_id"], name: "index_goods_on_user_id"
   end
 
 end
