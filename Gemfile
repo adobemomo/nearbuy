@@ -19,7 +19,12 @@ source 'https://rails-assets.org' do
 end
 
 group :development, :test do
+  gem 'rspec-rails'
   gem 'sqlite3', '~> 1.3.11'
+end
+
+group :test do
+  gem 'simplecov', :require => false
 end
 
 group :production do

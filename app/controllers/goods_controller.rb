@@ -23,7 +23,7 @@ class GoodsController < ApplicationController
     @good = Goods.new(goods_params)
 
     if @good.save
-      redirect_to goods_path, notice: 'Goods was successfully created.'
+      redirect_to goods_path, notice: "#{@good.name} was successfully created."
     else
       render action: 'new'
     end
