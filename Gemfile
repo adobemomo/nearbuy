@@ -25,6 +25,9 @@ end
 
 group :test do
   gem 'simplecov', :require => false
+  gem 'cucumber-rails', require: false
+  # database_cleaner is not mandatory, but highly recommended
+  gem 'database_cleaner'
 end
 
 group :production do
