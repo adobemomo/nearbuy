@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  root "flats#index"
+  root "goods#index"
   resources :goods
   get '/users/:username/profile', to: 'users#profile', as: :user_profile
   match "user/:username/edit_profile" => "user#edit_profile", as: :edit_user_profile, via: [:get, :post]
