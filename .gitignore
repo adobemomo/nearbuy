@@ -13,3 +13,10 @@
 /tmp
 
 .idea
+
+# db files
+/db/development.sqlite3
+/db/test.sqlite3
+
+# coverage files
+coverage
