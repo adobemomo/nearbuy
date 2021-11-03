@@ -14,12 +14,12 @@ gem 'uglifier'
 gem 'geocoder'
 gem 'gmaps4rails'
 
-gem 'bootstrap', '~> 5.1'
-gem 'devise', '~> 4.7'
-
 source 'https://rails-assets.org' do
   gem 'rails-assets-underscore'
 end
+
+gem 'bootstrap', '~> 5.1'
+gem 'devise', '~> 4.7'
 
 group :development, :test do
   gem 'rspec', '~> 3.10'

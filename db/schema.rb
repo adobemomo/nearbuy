@@ -12,11 +12,11 @@
 
 ActiveRecord::Schema.define(version: 20211103002051) do
 
-  create_table "flats", force: :cascade do |t|
+  create_table "goods", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "create_time"
+    t.datetime "update_time"
     t.float    "latitude"
     t.float    "longitude"
   end
