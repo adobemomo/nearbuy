@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :users
   root "flats#index"
   resources :flats
+  get '/users/:username/profile', to: 'users#profile', as: :user_profile
+  match "user/:username/edit_profile" => "user#edit_profile", as: :edit_user_profile, via: [:get, :post]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
