@@ -19,6 +19,16 @@ class GoodsController < ApplicationController
     @good = Goods.new
   end
 
+  def create
+    @good = Goods.new(goods_params)
+
+    if @good.save
+      redirect_to goods_path, notice: 'Goods was successfully created.'
+    else
+      render action: 'new'
+    end
+  end
+
   def edit; end
 
   def update
