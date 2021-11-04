@@ -38,6 +38,7 @@ Feature: operations on product include: add, edit, delete
   Scenario: delete an exist product
     Given I am on the NearBuy home page
     When I press op button "delete" under "Desktop table"
-    Then I should see "delete confirm alert"
-    When I press "OK"
-    Then I should not see "Desktop table"
+    Then I should be on the delete page for "Desktop table"
+    When I follow "delete"
+    Then I should be on the NearBuy home page
+    And I should not see "Desktop table"

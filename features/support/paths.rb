@@ -17,6 +17,7 @@ module NavigationHelpers
     when /^the create new product page$/ then new_good_path
     when /^the edit product page for "(.*)"$/ then edit_good_path(Goods.find_by(name: $1).id)
     when /^the detail page for "(.*)"$/ then '/goods/'+(Goods.find_by(name: $1).id).to_s
+    when /^the delete page for "(.*)"$/ then delete_good_path(Goods.find_by(name: $1).id)
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
