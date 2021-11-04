@@ -34,3 +34,9 @@
   - `rails db:migrate RAILS_ENV=test` to setup db in test environment
   - `rails cucumber` to run Cucumber
   - coverage files are generated in folder coverage
+
+### Features
+  - User can add, edit and delete goods
+  - Goods posted will show up on google map module
+  - Click pins on google map, goods info will show up
+  - User can sign up and sign in
