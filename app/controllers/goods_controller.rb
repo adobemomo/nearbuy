@@ -31,6 +31,10 @@ class GoodsController < ApplicationController
 
   def edit; end
 
+  def delete
+    @good = Goods.find(params[:id])
+  end
+
   def update
     if @good.update(goods_params)
       redirect_to @good, notice: 'Goods was successfully updated.'

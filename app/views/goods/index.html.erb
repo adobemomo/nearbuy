@@ -15,7 +15,7 @@
         <p><%= good.address %></p>
         <%= link_to "Edit", edit_good_path(good), class: "btn btn-default" %>
         or
-        <%= link_to "delete", good, method: :delete, data: { confirm: 'Are you sure?' }  %>
+        <%= link_to "delete", delete_good_path(good.id), class: "btn btn-default"  %>
       </div>
     <% end %>
   </div>
