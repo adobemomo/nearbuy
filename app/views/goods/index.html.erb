@@ -1,0 +1,48 @@
+<div>
+  <% if user_signed_in? %>
+    <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class:"nav-link" %>
+    <%= link_to "Profile", user_profile_path(:username => current_user.username), class:"nav-link" %>
+  <% else %>
+    <%= link_to "Sign Up", new_user_registration_path, class:"nav-link" %>
+    <%= link_to "Sign In", new_user_session_path, class:"nav-link" %>
+  <% end %>
+</div>
+
+<div class="row-fluid">
+  <div class="col-md-6">
+    <div id="map" style='width: 100%; height: 600px;'></div>
+  </div>
+  <div class="col-md-6">
+    <%= link_to new_good_path do %>
+      <button class="btn btn-primary">Add new goods</button>
+    <% end %>
+
+    <hr>
+
+    <% @goods.each do |good| %>
+      <div class="row-fluid">
+        <h2><%= link_to good.name, good %></h2>
+        <p><%= good.address %></p>
+        <%= link_to "Edit", edit_good_path(good), class: "btn btn-default" %>
+        or
+        <%= link_to "delete", delete_good_path(good.id), class: "btn btn-default"  %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% content_for(:after_js) do %>
+  <script type="text/javascript">
+    var handler = Gmaps.build('Google');
+    handler.buildMap({ internal: { id: 'map' } }, function(){
+      markers = handler.addMarkers(<%= raw @hash.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      if (markers.length == 0) {
+        handler.getMap().setZoom(2);
+      } else if (markers.length == 1) {
+        handler.getMap().setZoom(14);
+      }
+    });
+  </script>
+<% end %>

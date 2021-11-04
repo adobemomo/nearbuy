@@ -1,11 +1,20 @@
 test:
-  adapter: postgresql
+  adapter: sqlite3
   encoding: unicode
-  database: maps_example_test
+  database: db/test.sqlite3
   pool: 5
+  timeout: 5000
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: maps_example_production
+  database: db/maps_example_production
   pool: 5
+  timeout: 5000
+
+development:
+  adapter: sqlite3
+  encoding: unicode
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000

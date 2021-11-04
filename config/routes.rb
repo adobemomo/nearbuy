@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
-  root "flats#index"
-  resources :flats
+  devise_for :users
+  root "goods#index"
+  resources :goods
+  get '/users/:username/profile', to: 'users#profile', as: :user_profile
+  match "/users/:username/edit_profile" => "users#edit_profile", as: :edit_user_profile, via: [:get, :post]
+  root :to => redirect('/goods')
+
+  get '/:id/delete', to:'goods#delete', as: 'delete_good'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
