@@ -3,6 +3,10 @@
   - Rong Bai, rb3512
   - Jiawei Wang, jw4156
   - Sheng Jiang, sj3129
+
+### Github
+  https://github.com/adobemomo/nearbuy
+
 ### Version Prequisite
   `ruby 2.6.6`
   `bundle 2.2.28`
