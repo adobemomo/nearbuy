@@ -25,7 +25,7 @@
   - `rails spec` to run Rspec test
   - coverage files are generated in folder coverage
 
-### Rspec and Cucumber Test
+### Cucumber Test
   - `bundle install` to install required gem
   - `rails db:migrate RAILS_ENV=test` to setup db in test environment
   - `rails cucumber` to run Cucumber
