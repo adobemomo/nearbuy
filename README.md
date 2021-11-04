@@ -3,6 +3,10 @@
   - Rong Bai, rb3512
   - Jiawei Wang, jw4156
   - Sheng Jiang, sj3129
+
+### Github
+  https://github.com/adobemomo/nearbuy
+
 ### Version Prequisite
   `ruby 2.6.6`
   `bundle 2.2.28`
@@ -23,4 +27,10 @@
   - `bundle install` to install required gem
   - `rails db:migrate RAILS_ENV=test` to setup db in test environment
   - `rails spec` to run Rspec test
+  - coverage files are generated in folder coverage
+
+### Cucumber Test
+  - `bundle install` to install required gem
+  - `rails db:migrate RAILS_ENV=test` to setup db in test environment
+  - `rails cucumber` to run Cucumber
   - coverage files are generated in folder coverage
