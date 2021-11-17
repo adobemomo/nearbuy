@@ -2,9 +2,19 @@
 
 class GoodsController < ApplicationController
   before_action :find_good, only: %i[show edit update destroy]
+  before_action :authenticate_user!, only: %i[new create delete update destroy]
 
   def index
-    @goods = Goods.all_goods
+    # TODO: Refresh Button on index page
+    puts params
+    on_home_page = params[:clear] == 'clear' || !params[:sort].nil?
+    sort = on_home_page ? params[:sort] : session[:sort]
+    if session[:sort] != params[:sort]
+      session[:sort] = sort
+      redirect_to goods_path(sort: sort)
+    end
+
+    @goods = Goods.all_goods.order(sort)
 
     @hash = Gmaps4rails.build_markers(@goods) do |good, marker|
       marker.lat good.latitude
@@ -20,7 +30,9 @@ class GoodsController < ApplicationController
   end
 
   def create
-    @good = Goods.new(goods_params)
+    goods_param = goods_params
+    goods_param[:user_name] = current_user.username
+    @good = Goods.new(goods_param)
 
     if @good.save
       redirect_to goods_path, notice: "#{@good.name} was successfully created."

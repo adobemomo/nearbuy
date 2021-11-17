@@ -14,6 +14,18 @@
 
     
 
+    <button class="<%= params[:sort] == "name" ? "hilite bg-warning" : "" %>">
+      <%= link_to "Goods Name", goods_path(:sort => "name"), :id => 'goods_name_header' %>
+    </button>
+
+    <button class="<%= params[:sort] == "update_time" ? "hilite bg-warning" : "" %>">
+      <%= link_to "Update Time", goods_path(:sort => "update_time"), :id => 'update_time_header' %>
+    </button>
+
+    <button class="">
+      <%= link_to "Clear Sort Status", goods_path(:clear => "clear"), :id => 'clear_order_button' %>
+    </button>
+
     <p>Search for specific items:</p>  
     <input class="form-control" id="myInput" type="text" placeholder="Item Name...">
     <br>
@@ -25,13 +37,11 @@
           <div class="row-fluid">
             <h2><%= link_to good.name, good %></h2>
             <p><%= good.address %></p>
-            <%= link_to "Edit", edit_good_path(good), class: "btn btn-default" %>
-            or
-            <%= link_to "delete", delete_good_path(good.id), class: "btn btn-default"  %>
           </div>
         </li>
       <% end %>
     </ul>
+
   </div>
 </div>
 
