@@ -1,0 +1,39 @@
+<div class="row-fluid">
+    <div class="col-md-6">
+        <% if user_signed_in? %>
+        <%= link_to new_good_path do %>
+        <button class="btn btn-primary">Add new goods</button>
+        <% end %>
+        <hr>
+        <% end %>
+
+
+
+        <button class="<%= params[:sort] == "name" ? "hilite bg-warning" : "" %>">
+        <%= link_to "Goods Name", goods_path(:sort => "name"), :id => 'goods_name_header' %>
+        </button>
+
+        <button class="<%= params[:sort] == "update_time" ? "hilite bg-warning" : "" %>">
+        <%= link_to "Update Time", goods_path(:sort => "update_time"), :id => 'update_time_header' %>
+        </button>
+
+        <p>Search for specific items:</p>
+        <input class="form-control" id="myInput" type="text" placeholder="Item Name...">
+        <br>
+
+        <ul class="list-group" id="myList">
+
+            <% @goods.each do |good| %>
+            <li class="list-group-item">
+                <div class="row-fluid">
+                    <h2><%= link_to good.name, good %></h2>
+                    <p><%= good.address %></p>
+                  <%= link_to "Edit", edit_good_path(good), class: "btn btn-default"  %>
+                  <%= link_to "Delete", user_delete_good_path(good.id), class: "btn btn-default", method: :delete  %>
+                </div>
+            </li>
+            <% end %>
+        </ul>
+
+    </div>
+</div>
