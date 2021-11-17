@@ -35,7 +35,7 @@ class GoodsController < ApplicationController
     @good = Goods.new(goods_param)
 
     if @good.save
-      redirect_to goods_path, notice: "#{@good.name} was successfully created."
+      redirect_to user_goods_list_path(current_user.username), notice: "#{@good.name} was successfully created."
     else
       render action: 'new'
     end
@@ -43,9 +43,9 @@ class GoodsController < ApplicationController
 
   def edit; end
 
-  def delete
-    @good = Goods.find(params[:id])
-  end
+  # def delete
+  #   @good = Goods.find(params[:id])
+  # end
 
   def update
     if @good.update(goods_params)
@@ -55,13 +55,13 @@ class GoodsController < ApplicationController
     end
   end
 
-  def destroy
-    if @good.destroy
-      respond_destroy_success
-    else
-      respond_destroy_fail
-    end
-  end
+  # def destroy
+  #   if @good.destroy
+  #     respond_destroy_success
+  #   else
+  #     respond_destroy_fail
+  #   end
+  # end
 
   private
 
@@ -73,18 +73,18 @@ class GoodsController < ApplicationController
     params.require(:goods).permit(:name, :address)
   end
 
-  def respond_destroy_success
-    respond_to do |format|
-      format.html { redirect_to goods_url }
-      format.json { head :no_content }
-    end
-  end
-
-  def respond_destroy_fail
-    respond_to do |format|
-      format.html { redirect_to goods_url }
-      format.json { head :forbidden }
-    end
-  end
+  # def respond_destroy_success
+  #   respond_to do |format|
+  #     format.html { redirect_to goods_url }
+  #     format.json { head :no_content }
+  #   end
+  # end
+  #
+  # def respond_destroy_fail
+  #   respond_to do |format|
+  #     format.html { redirect_to goods_url }
+  #     format.json { head :forbidden }
+  #   end
+  # end
 
 end
