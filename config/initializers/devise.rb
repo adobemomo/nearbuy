@@ -294,7 +294,7 @@ Devise.setup do |config|
   #
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the devise scope, it would be:
-  # config.omniauth_path_prefix = '/my_engine/devise/auth'
+  # config.omniauth_path_prefix = '/my_engine/devise/devise'
 
   # ==> Turbolinks configuration
   # If your app is using Turbolinks, Turbolinks::Controller needs to be included to make redirection work correctly:
