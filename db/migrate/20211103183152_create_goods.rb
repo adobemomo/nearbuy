@@ -8,6 +8,7 @@ class CreateGoods < ActiveRecord::Migration[5.0]
       t.datetime "update_time"
       t.float    "latitude"
       t.float    "longitude"
+      t.string   "description"
     end
     add_index :goods, :user_name
   end

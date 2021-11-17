@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20211103183152) do
     t.datetime "update_time"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "description"
     t.index ["user_name"], name: "index_goods_on_user_name"
   end
 

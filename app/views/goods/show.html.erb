@@ -3,12 +3,13 @@
     <div class="row">
       <h2><%= @good.name %></h2>
       <p><%= @good.address %></p>
-      <p>Latitude: <%= @good.latitude %></p>
-      <p>Longitude: <%= @good.longitude %></p>
+      <p><%= @good.description %></p>
+<!--      <p>Latitude: <%#= @good.latitude %></p>-->
+<!--      <p>Longitude: <%#= @good.longitude %></p>-->
 
-      <%= link_to "Edit", edit_good_path(@good), class: "btn btn-primary" %>
-      or
-      <%= link_to "get batck to list", goods_path %>
+      <%#= link_to "Edit", edit_good_path(@good), class: "btn btn-primary" %>
+<!--      or-->
+      <%= link_to "Back", goods_path %>
     </div>
 
     <hr>
