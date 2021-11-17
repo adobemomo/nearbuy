@@ -29,8 +29,9 @@ class GoodsController < ApplicationController
   end
 
   def create
-    goods_params[:username] = params[:username]
-    @good = Goods.new(goods_params)
+    goods_param = goods_params
+    goods_param[:user_name] = current_user.username
+    @good = Goods.new(goods_param)
 
     if @good.save
       redirect_to goods_path, notice: "#{@good.name} was successfully created."
@@ -67,9 +68,6 @@ class GoodsController < ApplicationController
     @good = Goods.find(params[:id])
   end
 
-  def login_status
-
-  end
 
   def goods_params
     params.require(:goods).permit(:name, :address)
