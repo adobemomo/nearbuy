@@ -7,13 +7,23 @@ Feature: operations on product include: add, edit, delete
   Background: some products have been added to database
 
     Given the following products exist:
-      | name               | address                                |
-      | iPhone SE2         | 166 W 107th St, New York, NY 10025     |
-      | Desktop table      | 55 St Nicholas Ave, New York, NY 10026 |
-      | full-size mattress | 1220 5th Ave, New York, NY 10029       |
+      | name               | address                                | user_id |
+      | iPhone SE2         | 166 W 107th St, New York, NY 10025     | 1       |
+      | Desktop table      | 55 St Nicholas Ave, New York, NY 10026 | 1       |
+      | full-size mattress | 1220 5th Ave, New York, NY 10029       | 1       |
+      | Samsung Phone      | 1030 Amsterdam Ave, New York, NY 10025 | 1       |
+    And the following users exist:
+      | id | email          | address | first_name | last_name | username | password | password_confirmation |
+      | 1  | test@gmail.com | nyc     | Alice      | Brown     | aBRo     | 123456   | 123456                |
 
     And  I am on the NearBuy home page
-    Then 3 seed products should exist
+    When I follow "Sign In"
+    Then I should be on the Sign In Page
+    And I fill in "user_email" with "test@gmail.com"
+    And I fill in "user_password" with "123456"
+    And I press "Log in"
+    Then 4 seed products should exist
+    And I should be on the logged in page
 
   Scenario: add a new product
     Given I am on the NearBuy home page
@@ -42,33 +52,3 @@ Feature: operations on product include: add, edit, delete
     When I follow "delete"
     Then I should be on the NearBuy home page
     And I should not see "Desktop table"
-
-  Scenario: Sign Up&Sign In User and profile
-    Given I am on the NearBuy home page
-    When I follow "Sign Up"
-    Then I should be on the Sign Up page
-    When I fill in "user_email" with "testUser@gmail.com"
-    And I fill in "user_password" with "123456"
-    And I fill in "user_password_confirmation" with "123456"
-    And I fill in "user_username" with "testUser"
-    And I press "Sign up"
-    Then I should be on the logged in page
-    And I should see "Sign Out"
-    When I follow "Profile"
-    Then I should be on the profile page for "testUser"
-    And I should see "testuser@gmail.com"
-    And I should see "testUser"
-    And I follow "Back"
-    Then I follow "Sign Out"
-    When I follow "Sign In"
-    Then I should be on the Sign In Page
-    And I fill in "user_email" with "testUser@gmail.com"
-    And I fill in "user_password" with "123456"
-    And I press "Log in"
-    Then I should be on the logged in page
-    And I should see "Sign Out"
-
-
-  
-
-    

@@ -13,6 +13,12 @@ Given /the following products exist/ do |products_table|
   end
 end
 
+Given /the following users exist/ do |users_table|
+  users_table.hashes.each do |user|
+    User.create user
+  end
+end
+
 Then /I should see "(.*)" on the products list/ do |product_name|
   ## FIXME use list selector
   expect(page).to have_content(/#{product_name}/)
