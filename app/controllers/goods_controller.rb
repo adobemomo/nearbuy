@@ -4,7 +4,15 @@ class GoodsController < ApplicationController
   before_action :find_good, only: %i[show edit update destroy]
 
   def index
-    @goods = Goods.all_goods
+    # TODO: Refresh Button on index page
+    on_home_page = params[:commit] == 'Refresh' || !params[:sort].nil?
+    sort = on_home_page ? params[:sort] : session[:sort]
+    if session[:sort] != params[:sort]
+      session[:sort] = sort
+      redirect_to goods_path(sort: sort)
+    end
+
+    @goods = Goods.all_goods.order(sort)
 
     @hash = Gmaps4rails.build_markers(@goods) do |good, marker|
       marker.lat good.latitude

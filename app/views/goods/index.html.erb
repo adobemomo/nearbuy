@@ -18,14 +18,17 @@
     <% end %>
 
     <hr>
+    <button class="<%= params[:sort] == "title" ? "hilite bg-warning" : "" %>">
+      <%= link_to "Movie Title", movies_path(:sort => "title", :ratings => Hash[@ratings_to_show.collect { |item| [item, "1"]}]), :id => 'title_header' %>
+    </button>
 
     <% @goods.each do |good| %>
       <div class="row-fluid">
         <h2><%= link_to good.name, good %></h2>
         <p><%= good.address %></p>
-        <%= link_to "Edit", edit_good_path(good), class: "btn btn-default" %>
-        or
-        <%= link_to "delete", good, method: :delete, data: { confirm: 'Are you sure?' }  %>
+        <%#= link_to "Edit", edit_good_path(good), class: "btn btn-default" %>
+<!--        or-->
+        <%#= link_to "delete", good, method: :delete, data: { confirm: 'Are you sure?' }  %>
       </div>
     <% end %>
   </div>
