@@ -31,6 +31,10 @@
       <%= link_to "Update Time", goods_path(:sort => "update_time"), :id => 'update_time_header' %>
     </button>
 
+    <button class="">
+      <%= link_to "Clear Sort Status", goods_path(:clear => "clear"), :id => 'clear_order_button' %>
+    </button>
+
     <p>Search for specific items:</p>  
     <input class="form-control" id="myInput" type="text" placeholder="Item Name...">
     <br>

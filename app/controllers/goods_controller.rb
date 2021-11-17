@@ -6,7 +6,8 @@ class GoodsController < ApplicationController
 
   def index
     # TODO: Refresh Button on index page
-    on_home_page = params[:commit] == 'Refresh' || !params[:sort].nil?
+    puts params
+    on_home_page = params[:clear] == 'clear' || !params[:sort].nil?
     sort = on_home_page ? params[:sort] : session[:sort]
     if session[:sort] != params[:sort]
       session[:sort] = sort
@@ -67,7 +68,6 @@ class GoodsController < ApplicationController
   def find_good
     @good = Goods.find(params[:id])
   end
-
 
   def goods_params
     params.require(:goods).permit(:name, :address)
