@@ -18,7 +18,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-underscore'
 end
 
-gem 'bootstrap', '~> 5.1'
+gem 'bootstrap', '~> 5.1.3'
 gem 'devise', '~> 4.7'
 
 group :development, :test do
