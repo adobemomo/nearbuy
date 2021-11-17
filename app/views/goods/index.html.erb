@@ -18,8 +18,13 @@
     <% end %>
 
     <hr>
-    <button class="<%= params[:sort] == "title" ? "hilite bg-warning" : "" %>">
-      <%= link_to "Movie Title", movies_path(:sort => "title", :ratings => Hash[@ratings_to_show.collect { |item| [item, "1"]}]), :id => 'title_header' %>
+
+    <button class="<%= params[:sort] == "update_time" ? "hilite bg-warning" : "" %>">
+      <%= link_to "Goods Name", goods_path(:sort => "name"), :id => 'goods_name_header' %>
+    </button>
+
+    <button class="<%= params[:sort] == "update_time" ? "hilite bg-warning" : "" %>">
+      <%= link_to "Update Time", goods_path(:sort => "update_time"), :id => 'update_time_header' %>
     </button>
 
     <% @goods.each do |good| %>

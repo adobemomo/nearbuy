@@ -2,6 +2,7 @@
 
 class GoodsController < ApplicationController
   before_action :find_good, only: %i[show edit update destroy]
+  before_action :authenticate_user!, only: %i[new create delete update destroy]
 
   def index
     # TODO: Refresh Button on index page
@@ -28,6 +29,7 @@ class GoodsController < ApplicationController
   end
 
   def create
+    goods_params[:username] = params[:username]
     @good = Goods.new(goods_params)
 
     if @good.save
@@ -38,6 +40,10 @@ class GoodsController < ApplicationController
   end
 
   def edit; end
+
+  def delete
+    @good = Goods.find(params[:id])
+  end
 
   def update
     if @good.update(goods_params)
@@ -59,6 +65,10 @@ class GoodsController < ApplicationController
 
   def find_good
     @good = Goods.find(params[:id])
+  end
+
+  def login_status
+
   end
 
   def goods_params
