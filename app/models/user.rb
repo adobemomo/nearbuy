@@ -7,4 +7,8 @@ class User < ApplicationRecord
   def self.get_user_by_username(username)
     User.find_by(username: username)
   end
+
+  def self.get_goods_of_user(username)
+    Goods.where(user_name: username).to_a
+  end
 end
