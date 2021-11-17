@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :goods
   get '/users/:username/profile', to: 'users#profile', as: :user_profile
   match "/users/:username/edit_profile" => "users#edit_profile", as: :edit_user_profile, via: [:get, :post]
+  match '/users/goods_list' => "users#goods_list", as: :user_goods_list, via: [:get]
+  match '/users/goods_list' => "users#delete_good", as: :user_delete_good, via: [:delete]
   root :to => redirect('/goods')
 
   get '/:id/delete', to:'goods#delete', as: 'delete_good'
