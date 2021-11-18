@@ -1,5 +1,3 @@
-
-
 <div class="row-fluid">
   <div class="col-md-6">
     <div id="map" style='width: 100%; height: 600px;'></div>
@@ -15,11 +13,11 @@
     
 
     <button class="<%= params[:sort] == "name" ? "hilite bg-warning" : "" %>">
-      <%= link_to "Sort By Name", goods_path(:sort => "name"), :id => 'goods_name_header' %>
+      <%= link_to "Goods Name", goods_path(:sort => "name"), :id => 'goods_name_header' %>
     </button>
 
     <button class="<%= params[:sort] == "update_time" ? "hilite bg-warning" : "" %>">
-      <%= link_to "Sort By Time", goods_path(:sort => "update_time"), :id => 'update_time_header' %>
+      <%= link_to "Update Time", goods_path(:sort => "update_time"), :id => 'update_time_header' %>
     </button>
 
     <button class="">

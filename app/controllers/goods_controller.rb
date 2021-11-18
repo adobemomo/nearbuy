@@ -35,7 +35,7 @@ class GoodsController < ApplicationController
     @good = Goods.new(goods_param)
 
     if @good.save
-      redirect_to user_goods_list_path(current_user.username), notice: "#{@good.name} was successfully created."
+      redirect_to user_goods_list_path, notice: "#{@good.name} was successfully created."
     else
       render action: 'new'
     end
@@ -49,7 +49,7 @@ class GoodsController < ApplicationController
 
   def update
     if @good.update(goods_params)
-      redirect_to @good, notice: 'Goods was successfully updated.'
+      redirect_to user_goods_list_path, notice: 'Goods was successfully updated.'
     else
       render action: 'edit'
     end
