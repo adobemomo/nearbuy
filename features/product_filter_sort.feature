@@ -21,8 +21,8 @@ Feature: show products with sorting and filtering
     Scenario: sort by name:
         Given I am on the NearBuy home page
         Then I should see "iPhone SE2" before "Desktop table"
-        Then I should see "Goods Name"
-        When I follow "Goods Name"
+        Then I should see "Sort By Name"
+        When I follow "Sort By Name"
         Then I should be on the NearBuy home page
         Then I should see "Desktop table" before "iPhone SE2"
 
@@ -30,16 +30,16 @@ Feature: show products with sorting and filtering
     Scenario: sort by time:
         Given I am on the NearBuy home page
         Then I should see "iPhone SE2" before "full-size mattress"
-        Then I should see "Update Time"
-        When I follow "Update Time"
+        Then I should see "Sort By Time"
+        When I follow "Sort By Time"
         Then I should be on the NearBuy home page
         Then I should see "full-size mattress" before "iPhone SE2"
 
     Scenario: clear sort status:
         Given I am on the NearBuy home page
         Then I should see "iPhone SE2" before "Desktop table"
-        Then I should see "Goods Name"
-        When I follow "Goods Name"
+        Then I should see "Sort By Name"
+        When I follow "Sort By Name"
         Then I should be on the NearBuy home page
         Then I should see "Desktop table" before "iPhone SE2"
         Then I should see "Clear Sort Status"
