@@ -22,7 +22,7 @@ module NavigationHelpers
     when /^the detail page for "(.*)"$/ then '/goods/'+(Goods.find_by(name: $1).id).to_s
     when /^the delete page for "(.*)"$/ then delete_good_path(Goods.find_by(name: $1).id)
     when /^the Sign Up page$/ then '/users/sign_up'
-
+    when /^the Goods List page$/ then '/users/goods_list'
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
