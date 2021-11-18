@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def delete_good
-    @good = Goods.find_by(params[:id])
+    @good = Goods.find_by(id: params[:id])
     @good.destroy
     redirect_to(user_goods_list_path)
   end

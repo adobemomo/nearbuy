@@ -28,7 +28,7 @@
                     <h2><%= link_to good.name, good %></h2>
                     <p><%= good.address %></p>
                   <%= link_to "Edit", edit_good_path(good), class: "btn btn-default"  %>
-                  <%= link_to "Delete", user_delete_good_path(good.id), class: "btn btn-default", method: :delete  %>
+                  <%= link_to "Delete", user_delete_good_path(id: good.id), class: "btn btn-default", method: :delete  %>
                 </div>
             </li>
             <% end %>

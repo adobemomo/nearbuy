@@ -48,6 +48,5 @@ Feature: operations on product include: add, edit, delete
   Scenario: delete an exist product
     Given I am on the Goods List page
     When I press op button "delete" under "Desktop table"
-    And I wait
     Then I should be on the Goods List page
     And I should not see "Desktop table"
