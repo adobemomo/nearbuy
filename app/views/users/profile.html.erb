@@ -1,7 +1,16 @@
 
-<h1><%= @user.email %></h1>
-<h1><%= @user.username %></h1>
-<h1><%= @user.first_name %></h1>
-<h1><%= @user.last_name %></h1>
+<div class="card text-center" style="border-style: dotted; border-width: thick">
+  <div class="card-header">
+    <h1><%= @user.username %></h1>
+  </div>
+  <div class="card-body">
+    <h2 class="card-title"><%= @user.email %></h2>
+    <%= link_to "Goods List", user_goods_list_path(), class:"nav-link btn btn-primary navbar-btn" %>
+  </div>
+  <br/>
+  <div class="card-footer text-muted">
+    <%= link_to 'Back to', goods_path %> @NearBuy 
+  </div>
+  
+</div>
 
-<%= link_to 'Back', goods_path %>
