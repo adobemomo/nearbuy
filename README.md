@@ -39,9 +39,13 @@
 
 ### Features
   - User can add, edit and delete goods
+  - User can filter goods by name and sort goods by time and name
   - Goods posted will show up on google map module
   - Click pins on google map, goods info will show up
-  - User can sign up and sign in
+  - User can sign up, sign in, sign out and view profile
+  - Improve authentication system
+  - Add access protections on goods
 
 ### Coverage
-  Since Cucumber is basically for testing the controller, and RSpec is for models and database, the coverage for these two tests has no need to be overlapped. So the coverage for each might not be high (i.e. close to 100%). However, the overall test coverage is near 100%.
+  Since Cucumber is basically for testing the controller, and RSpec is for models and database, the coverage for these two tests has no need to be overlapped.
+  Coverages for RSpec and cucumber are close to 100%.
