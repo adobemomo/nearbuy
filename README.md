@@ -12,9 +12,9 @@
   `bundle 2.2.28`
   `gem 3.0.9`
 ### Deployment instructions
-  - heroku app link: https://mysterious-oasis-25704.herokuapp.com/
+  - heroku app link: https://mysterious-shore-15353.herokuapp.com/
   - run `bundle`
-  - run `git remote add heroku https://git.heroku.com/mysterious-oasis-25704.git`
+  - run `git remote add heroku https://git.heroku.com/mysterious-shore-15353.git`
   - run `git push heroku <your_brunch_name>:main` to see your change on heroku
   - run `heroku run rails db:migrate` to update database
   - run `heroku run rails db:seed` to add init data
