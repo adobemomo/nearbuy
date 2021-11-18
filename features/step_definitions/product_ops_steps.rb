@@ -41,7 +41,3 @@ end
 Then(/^(\d+) seed products should exist$/) do |arg|
   Goods.count.should be arg.to_i
 end
-
-When /I wait/ do 
-  sleep(10)
-end
