@@ -5,8 +5,6 @@ class GoodsController < ApplicationController
   before_action :authenticate_user!, only: %i[new create delete update destroy]
 
   def index
-    # TODO: Refresh Button on index page
-    puts params
     on_home_page = params[:clear] == 'clear' || !params[:sort].nil?
     sort = on_home_page ? params[:sort] : session[:sort]
     if session[:sort] != params[:sort]
@@ -32,10 +30,11 @@ class GoodsController < ApplicationController
   def create
     goods_param = goods_params
     goods_param[:user_name] = current_user.username
+
     @good = Goods.new(goods_param)
 
     if @good.save
-      redirect_to user_goods_list_path(current_user.username), notice: "#{@good.name} was successfully created."
+      redirect_to user_goods_list_path, notice: "#{@good.name} was successfully created."
     else
       render action: 'new'
     end
