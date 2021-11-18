@@ -13,10 +13,15 @@ Given /the following products exist/ do |products_table|
   end
 end
 
-Given /the following products exist/ do |users_table|
+Given /the following users exist/ do |users_table|
   users_table.hashes.each do |user|
-    Users.create user
+    User.create user
   end
+end
+
+Then /I should see "(.*)" before "(.*)"/ do |a, b|
+ regexp = /^.*#{a}.*#{b}.*$/
+  expect(page.body).to match(regexp)
 end
 
 Then /I should see "(.*)" on the products list/ do |product_name|
@@ -37,9 +42,6 @@ Then(/^(\d+) seed products should exist$/) do |arg|
   Goods.count.should be arg.to_i
 end
 
-Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
-  #  ensure that that e1 occurs before e2.
-  #  page.body is the entire content of the page as a string.
-  expect(page.body.index(e1) < page.body.index(e2))
+When /I wait/ do 
+  sleep(10)
 end
-
