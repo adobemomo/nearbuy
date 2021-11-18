@@ -14,8 +14,10 @@
 ### Deployment instructions
   - heroku app link: https://mysterious-oasis-25704.herokuapp.com/
   - run `bundle`
+  - run `git remote add heroku https://git.heroku.com/mysterious-oasis-25704.git`
   - run `git push heroku <your_brunch_name>:main` to see your change on heroku
   - run `heroku run rails db:migrate` to update database
+  - run `heroku run rails db:seed` to add init data
 
 ### Run in local
   - `bundle install` to install required gem
