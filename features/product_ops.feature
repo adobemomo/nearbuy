@@ -7,14 +7,51 @@ Feature: operations on product include: add, edit, delete
   Background: some products have been added to database
 
     Given the following products exist:
-      | name               | address                                |
-      | iPhone SE2         | 166 W 107th St, New York, NY 10025     |
-      | Desktop table      | 55 St Nicholas Ave, New York, NY 10026 |
-      | full-size mattress | 1220 5th Ave, New York, NY 10029       |
+      | name               | address                                | update_time                     | user_name |
+      | iPhone SE2         | 166 W 107th St, New York, NY 10025     | Tue, 16 Nov 2021 06:00:00 +0000 | mockUser |
+      | Desktop table      | 55 St Nicholas Ave, New York, NY 10026 | Tue, 16 Nov 2021 07:00:00 +0000 | mockUser |
+      | full-size mattress | 1220 5th Ave, New York, NY 10029       | Tue, 16 Nov 2021 05:00:00 +0000 | mockUser |
+
+
+    Given the following products exist:
+      | email               | encrypted_password                     | created_at                      | updated_at |
+      | iPhone SE2          | 166 W 107th St, New York, NY 10025     | Tue, 16 Nov 2021 06:00:00 +0000 | mockUser   |
+      | Desktop table       | 55 St Nicholas Ave, New York, NY 10026 | Tue, 16 Nov 2021 07:00:00 +0000 | mockUser   |
+      | full-size mattress  | 1220 5th Ave, New York, NY 10029       | Tue, 16 Nov 2021 05:00:00 +0000 | mockUser   |
 
     And  I am on the NearBuy home page
     Then 3 seed products should exist
 
+  Scenario: sort by name:
+    Given I am on the NearBuy home page
+    Then I should see "iPhone SE2" before "Desktop table"
+    Then I should see "Sort By Name"
+    When I follow "Sort By Name"
+    Then I should be on the NearBuy home page
+    Then I should see "Desktop table" before "iPhone SE2"
+
+  
+  Scenario: sort by time:
+    Given I am on the NearBuy home page
+    Then I should see "iPhone SE2" before "full-size mattress"
+    Then I should see "Sort By Time"
+    When I follow "Sort By Time"
+    Then I should be on the NearBuy home page
+    Then I should see "full-size mattress" before "iPhone SE2"
+
+  Scenario: clear sort status:
+    Given I am on the NearBuy home page
+    Then I should see "iPhone SE2" before "Desktop table"
+    Then I should see "Sort By Name"
+    When I follow "Sort By Name"
+    Then I should be on the NearBuy home page
+    Then I should see "Desktop table" before "iPhone SE2"
+    Then I should see "Clear Sort Status"
+    When I follow "Clear Sort Status"
+    Then I should be on the NearBuy home page
+    Then I should see "iPhone SE2" before "Desktop table"
+  
+    
   Scenario: add a new product
     Given I am on the NearBuy home page
     Then I should see "Add new goods"
