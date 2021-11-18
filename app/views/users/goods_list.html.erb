@@ -8,7 +8,6 @@
         <% end %>
 
 
-
         <button class="<%= params[:sort] == "name" ? "hilite bg-warning" : "" %>">
         <%= link_to "Goods Name", goods_path(:sort => "name"), :id => 'goods_name_header' %>
         </button>

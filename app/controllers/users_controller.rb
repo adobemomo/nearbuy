@@ -12,10 +12,7 @@ class UsersController < ApplicationController
 
   def delete_good
     @good = Goods.find_by(params[:id])
-    if @good.destroy
-      redirect_to(user_goods_list_path)
-    else
-      respond_destroy_fail
-    end
+    @good.destroy
+    redirect_to(user_goods_list_path)
   end
 end
