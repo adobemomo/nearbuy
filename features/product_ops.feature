@@ -25,6 +25,36 @@ Feature: operations on product include: add, edit, delete
     Then 4 seed products should exist
     And I should be on the logged in page
 
+  Scenario: sort by name:
+    Given I am on the NearBuy home page
+    Then I should see "iPhone SE2" before "Desktop table"
+    Then I should see "Sort By Name"
+    When I follow "Sort By Name"
+    Then I should be on the NearBuy home page
+    Then I should see "Desktop table" before "iPhone SE2"
+
+
+  Scenario: sort by time:
+    Given I am on the NearBuy home page
+    Then I should see "iPhone SE2" before "full-size mattress"
+    Then I should see "Sort By Time"
+    When I follow "Sort By Time"
+    Then I should be on the NearBuy home page
+    Then I should see "full-size mattress" before "iPhone SE2"
+
+  Scenario: clear sort status:
+    Given I am on the NearBuy home page
+    Then I should see "iPhone SE2" before "Desktop table"
+    Then I should see "Sort By Name"
+    When I follow "Sort By Name"
+    Then I should be on the NearBuy home page
+    Then I should see "Desktop table" before "iPhone SE2"
+    Then I should see "Clear Sort Status"
+    When I follow "Clear Sort Status"
+    Then I should be on the NearBuy home page
+    Then I should see "iPhone SE2" before "Desktop table"
+
+
   Scenario: add a new product
     Given I am on the NearBuy home page
     Then I should see "Add new goods"
