@@ -12,6 +12,9 @@ Feature: user can create account and log in to manage goods
             | Desktop table      | 55 St Nicholas Ave, New York, NY 10026 |
             | full-size mattress | 1220 5th Ave, New York, NY 10029       |
             | Samsung Phone      | 1030 Amsterdam Ave, New York, NY 10025 |
+        And the following users exist:
+            | id | email          | address | first_name | last_name | username | password | password_confirmation |
+            | 1  | test11@gmail.com | nyc     | Alice      | Brown     | test11     | 123456   | 123456                |
 
 
     Scenario: Sign Up&Sign In User and profile
@@ -65,3 +68,15 @@ Feature: user can create account and log in to manage goods
         And I fill in "user_email" with "testUser"
         And I fill in "user_password" with "654321"
         Then I should be on the Sign In Page
+
+    Scenario: View Profile
+        Given I am on the NearBuy home page
+        When I follow "Sign In"
+        Then I should be on the Sign In Page
+        And I fill in "user_email" with "test11@gmail.com"
+        And I fill in "user_password" with "123456"
+        And I press "Log in"
+        When I follow "Profile"
+        Then I should be on the profile page for "test11"
+        And I should see "test11"
+        And I should see "test11@gmail.com"
