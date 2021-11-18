@@ -64,7 +64,7 @@ RSpec.describe GoodsController, type: :controller do
       patch :update, { id: good.id, goods:         { address: '2389 Broadway, New York, NY 10024' }
       }
 
-      expect(response).to redirect_to good_path(good)
+      expect(response).to redirect_to user_goods_list_path
       expect(Goods.find_by(id: good.id).address).to match(/2389 Broadway, New York, NY 10024/)
       expect(flash[:notice]).to match(/Goods was successfully updated./)
       good.destroy
