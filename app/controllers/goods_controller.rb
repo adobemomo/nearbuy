@@ -17,7 +17,11 @@ class GoodsController < ApplicationController
 
     @goods = Goods.all_goods.order(sort)
 
-    @goods = Goods.explore_goods(latitude, longitude, sort) if !latitude.nil? && !longitude.nil?
+    goods_map = nil
+    if !latitude.nil? && !longitude.nil?
+      goods_map = Goods.explore_goods(latitude, longitude, sort)
+      @goods = goods_map['goods']
+    end
 
     puts '----------------------------------------'
     @goods.each do |good|
@@ -25,11 +29,40 @@ class GoodsController < ApplicationController
     end
     puts '----------------------------------------'
 
-    @hash = Gmaps4rails.build_markers(@goods) do |good, marker|
-      marker.lat good.latitude
-      marker.lng good.longitude
-      marker.infowindow render_to_string(partial: "/goods/map_box", locals: { good: good })
-    end
+    # @hash = Gmaps4rails.build_markers(@goods) do |good, marker|
+    #   marker.lat good.latitude
+    #   marker.lng good.longitude
+    #   marker.infowindow render_to_string(partial: "/goods/map_box", locals: { good: good })
+    # end
+
+    @hash = if !latitude.nil? && !longitude.nil?
+              Gmaps4rails.build_markers(@goods) do |good, marker|
+                goods_map[good]['lats'].length.each do |i|
+                  marker.lat goods_map[good]['lats'][i]
+                  marker.lng goods_map[good]['longs'][i]
+                  marker.infowindow render_to_string(partial: "/goods/map_box", locals: { good: good })
+                end
+              end
+            else
+              Gmaps4rails.build_markers(@goods) do |good, marker|
+                if !good.latitude.nil? && !good.longitude.nil?
+                  marker.lat good.latitude
+                  marker.lng good.longitude
+                  marker.infowindow render_to_string(partial: "/goods/map_box", locals: { good: good })
+                end
+                if !good.latitude1.nil? && !good.longitude1.nil?
+                  marker.lat good.latitude1
+                  marker.lng good.longitude1
+                  marker.infowindow render_to_string(partial: "/goods/map_box", locals: { good: good })
+                end
+                if !good.latitude2.nil? && !good.longitude2.nil?
+                  marker.lat good.latitude2
+                  marker.lng good.longitude2
+                  marker.infowindow render_to_string(partial: "/goods/map_box", locals: { good: good })
+                end
+              end
+            end
+
   end
 
   def show; end
