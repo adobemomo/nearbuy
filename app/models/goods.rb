@@ -31,7 +31,7 @@ class Goods < ActiveRecord::Base
         longs.append(good.longitude2)
       end
 
-      lats.length.each do |i|
+      (0..lats.length-1).each do |i|
         lat_diff = (lat - lats[i]) * 3.1415926 / 180.0
         lng_diff = (long - longs[i]) * 3.1415926 / 180.0
         lat_sin = Math.sin(lat_diff / 2.0) ** 2
@@ -42,17 +42,16 @@ class Goods < ActiveRecord::Base
         next unless result.to_i < 1000
 
         unless explore.key?(good)
-          explore[good] = {
+          explore[good.id] = {
             'lats': [],
             'longs': []
           }
+          explore[:goods].append(good)
         end
+        # puts explore
+        explore[good.id][:lats].append(lats[i])
+        explore[good.id][:longs].append(longs[i])
 
-        explore[good]['lats'].append(lats[i])
-        explore[good]['longs'].append(longs[i])
-
-
-        # explore.append(good) if result.to_i < 1000
       end
     end
 

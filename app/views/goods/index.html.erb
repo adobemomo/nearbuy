@@ -14,17 +14,23 @@
       Explore Mode
     </button>
 
-    <button class="<%= params[:sort] == "name" ? "hilite bg-warning" : "" %>">
-      <%= link_to "Sort By Name", goods_path(:sort => "name"), :id => 'goods_name_header' %>
-    </button>
+    <% if params[:latitude].nil? or params[:longitude].nil? %>
+      <button class="<%= params[:sort] == "name" ? "hilite bg-warning" : "" %>">
+        <%= link_to "Sort By Name", goods_path(:sort => "name"), :id => 'goods_name_header' %>
+      </button>
 
-    <button class="<%= params[:sort] == "update_time" ? "hilite bg-warning" : "" %>">
-      <%= link_to "Sort By Time", goods_path(:sort => "update_time"), :id => 'update_time_header' %>
-    </button>
+      <button class="<%= params[:sort] == "update_time" ? "hilite bg-warning" : "" %>">
+        <%= link_to "Sort By Time", goods_path(:sort => "update_time"), :id => 'update_time_header' %>
+      </button>
 
-    <button class="">
-      <%= link_to "Clear Sort Status", goods_path(:clear => "clear"), :id => 'clear_order_button' %>
-    </button>
+      <button class="">
+        <%= link_to "Clear Sort Status", goods_path(:clear => "clear"), :id => 'clear_order_button' %>
+      </button>
+    <% else %>
+      <button class="">
+        <%= link_to "Exit Explore Mode", goods_path, :id => 'exit_explore' %>
+      </button>
+    <% end %>
 
     <p>Search for specific items:</p>  
     <input class="form-control" id="myInput" type="text" placeholder="Item Name...">
