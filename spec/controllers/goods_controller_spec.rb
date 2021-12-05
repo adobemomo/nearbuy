@@ -40,7 +40,7 @@ RSpec.describe GoodsController, type: :controller do
       expect(response).to redirect_to goods_path(sort: 'name')
     end
     it 'explore mode' do
-      get :index, {params: {lat: 40.7909156, long: -73.9726773}}
+      get :index, {params: {latitude: 40.7909156, longitude: -73.9726773}}
 
       # expect(response).to redirect_to goods_path(sort: 'name')
     end
