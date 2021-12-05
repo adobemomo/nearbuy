@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211103183152) do
+ActiveRecord::Schema.define(version: 20211202202018) do
 
   create_table "goods", force: :cascade do |t|
     t.string   "user_name"
@@ -21,6 +21,12 @@ ActiveRecord::Schema.define(version: 20211103183152) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "description"
+    t.string   "address1"
+    t.float    "latitude1"
+    t.float    "longitude1"
+    t.string   "address2"
+    t.float    "latitude2"
+    t.float    "longitude2"
     t.index ["user_name"], name: "index_goods_on_user_name"
   end
 
