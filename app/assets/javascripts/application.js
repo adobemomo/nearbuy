@@ -46,13 +46,13 @@ $(document).on('ready', function(event) {
         bounds: defaultBounds
     });
 
-    const input2 = document.getElementById('gmaps_input_address2');
+    const input2 = document.getElementById('gmaps_input_address1');
 
     const searchBox2 = new google.maps.places.SearchBox(input2, {
         bounds: defaultBounds
     });
 
-    const input3 = document.getElementById('gmaps_input_address3');
+    const input3 = document.getElementById('gmaps_input_address2');
 
     const searchBox3 = new google.maps.places.SearchBox(input3, {
         bounds: defaultBounds
