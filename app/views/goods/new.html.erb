@@ -23,10 +23,17 @@
         </div>
 
         <div class="form-group">
-          <%= f.label :address %>
-          <%= f.text_field :address, class: "form-control" %>
+          <label for="good_address_1">Address 1</label>
+          <input id='gmaps_input_address' placeholder='Start typing a place name...' type='text' class="form-control" name="goods[address]"/>
         </div>
-
+        <div class="form-group">
+          <label for="good_address_2">Address 2 [Optional]</label>
+          <input id='gmaps_input_address2' placeholder='Start typing a place name...' type='text' class="form-control" name="goods[address2]"/>
+        </div>
+        <div class="form-group">
+          <label for="good_address_3">Address 3 [Optional]</label>
+          <input id='gmaps_input_address3' placeholder='Start typing a place name...' type='text' class="form-control" name="goods[address3]"/>
+        </div>
         <div class="form-group">
           <%= f.submit "GO", class: "btn btn-primary" %>
         </div>

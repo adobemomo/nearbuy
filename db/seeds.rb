@@ -11,7 +11,7 @@ User.create(email: "sjiang@gmail.com", address: "nyc", first_name: "aa", last_na
 User.create(email: "john@gmail.com", address: "boston", first_name: "zq", last_name: "hu", username: "hzq", password: "123456", password_confirmation: "123456")
 
 Goods.destroy_all
-Goods.create(name: "Apple Watch", address: "1047 Amsterdam Ave, New York, NY 10025", user_name: "lol", description: "apple watch series 7, 99% new")
+Goods.create(name: "Apple Watch", address: "1047 Amsterdam Ave, New York, NY 10025", user_name: "lol", description: "apple watch series 7, 99% new", address2: "1048 Amsterdam Ave, New York, NY 10025", address3: "1049 Amsterdam Ave, New York, NY 10025")
 Goods.create(name: "Textbooks", address: "2389 Broadway, New York, NY 10024", user_name: "lol", description: "Calculus")
 Goods.create(name: "Desktop table", address: "2393 Broadway, New York, NY 10024", user_name: "lol", description: "good")
 Goods.create(name: "nintendo switch", address: "2396 Broadway, New York, NY 10024", user_name: "lol", description: "cool")
