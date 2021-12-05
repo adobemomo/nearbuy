@@ -12,7 +12,18 @@ class GoodsController < ApplicationController
       redirect_to goods_path(sort: sort)
     end
 
+    latitude = params[:latitude]
+    longitude = params[:longitude]
+
     @goods = Goods.all_goods.order(sort)
+
+    @goods = Goods.explore_goods(latitude, longitude, sort) if !latitude.nil? && !longitude.nil?
+
+    puts '----------------------------------------'
+    @goods.each do |good|
+      puts good.name
+    end
+    puts '----------------------------------------'
 
     @hash = Gmaps4rails.build_markers(@goods) do |good, marker|
       marker.lat good.latitude

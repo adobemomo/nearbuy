@@ -10,7 +10,9 @@
 <!--      <hr>-->
     <%# end %>
 
-    
+    <button class="" id="loc" onclick="explore_mode()">
+      Explore Mode
+    </button>
 
     <button class="<%= params[:sort] == "name" ? "hilite bg-warning" : "" %>">
       <%= link_to "Sort By Name", goods_path(:sort => "name"), :id => 'goods_name_header' %>
@@ -56,7 +58,79 @@
         handler.getMap().setZoom(14);
       }
     });
+
+    // let map, infoWindow;
+    // infoWindow = new google.maps.InfoWindow();
+    //
+    // // const locationButton = document.createElement("button");
+    // // var MyDiv =document.getElementById("loc");
+    // const locationButton = document.getElementById("loc");
+    // var curPos;
+    //
+    // locationButton.textContent = "Explore";
+    // locationButton.classList.add("custom-map-control-button");
+    //
+    // locationButton.addEventListener("click", () => {
+    //     // Try HTML5 geolocation.
+    //     if (navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition(
+    //             (position) => {
+    //                 curPos = {
+    //                     lat: position.coords.latitude,
+    //                     lng: position.coords.longitude,
+    //                 };
+    //
+    //                 // infoWindow.setPosition(pos);
+    //                 // infoWindow.setContent("Location found.");
+    //                 // infoWindow.open(map);
+    //                 // map.setCenter(pos);
+    //                 console.log(curPos)
+    //             },
+    //             () => {
+    //                 handleLocationError(true, infoWindow, handler.getCenter());
+    //             }
+    //         );
+    //     } else {
+    //         // Browser doesn't support Geolocation
+    //         handleLocationError(false, infoWindow, handler.getCenter());
+    //     }
+    // });
+
+    // MyDiv.appendChild(locationButton);
+
+    // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    //     infoWindow.setPosition(pos);
+    //     infoWindow.setContent(
+    //         browserHasGeolocation
+    //             ? "Error: The Geolocation service failed."
+    //             : "Error: Your browser doesn't support geolocation."
+    //     );
+    //     // infoWindow.open(map);
+    // }
+
+
   </script>
+
+  <script>
+    function explore_mode() {
+        let curPos;
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    curPos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                    };
+                    console.log(curPos)
+                    window.location.href = '/goods?latitude=' + curPos.lat + '&longitude=' + curPos.lng
+                }
+            );
+        }
+    }
+  </script>
+
+
   <script>
     $(document).ready(function(){
       $("#myInput").on("keyup", function() {
