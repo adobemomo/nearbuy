@@ -10,6 +10,8 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'sass-rails'
 gem 'uglifier'
+gem 'gmaps-autocomplete-rails'
+gem 'jquery-ui-rails'
 
 gem 'geocoder'
 gem 'gmaps4rails'
