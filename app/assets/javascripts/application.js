@@ -29,7 +29,6 @@ function showPosition(position) {
 }
 
 $(document).on('ready', function(event) {
-    console.log(`document ready`);
     getLocation();
 
     const center = { lat: 50.064192, lng: -130.605469 };
