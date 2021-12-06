@@ -16,7 +16,13 @@ class GoodsController < ApplicationController
     latitude = params[:latitude]
     longitude = params[:longitude]
 
-    @goods = Goods.all_goods.order(sort)
+    if params[:sort].nil?
+      @goods = Goods.all_goods
+    elsif params[:sort] == 'update_time'
+      @goods = Goods.all_goods.order(update_time: :desc)
+    elsif params[:sort] == 'name'
+      @goods = Goods.all_goods.order("lower(name)")
+    end
 
     goods_map = nil
     if !latitude.nil? && !longitude.nil?
