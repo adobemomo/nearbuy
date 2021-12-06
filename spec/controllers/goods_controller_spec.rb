@@ -14,7 +14,7 @@ RSpec.describe GoodsController, type: :controller do
     Goods.create(name: "Desktop table", address: "2393 Broadway, New York, NY 10024", user_name: "lol", description: "good")
     Goods.create(name: "nintendo switch", address: "2396 Broadway, New York, NY 10024", user_name: "lol", description: "cool")
     Goods.create(name: "chair", address: "2400 Broadway, New York, NY 10024", user_name: "lol", description: "great")
-    Goods.create(name: "pot", address: "2404 Broadway, New York, NY 10024", user_name: "lol", description: "excellent")
+    Goods.create(name: "pot", address: "2404 Broadway, New York, NY 10024", address1: "2408 Broadway, New York, NY 10024", address2: "2412 Broadway, New York, NY 10024", user_name: "lol", description: "excellent")
     User.create(email: 'test@gmail.com', address: 'nyc', first_name: 'aa', last_name: 'bb', username: 'lol', password: '123456', password_confirmation: '123456')
   end
 

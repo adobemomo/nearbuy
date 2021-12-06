@@ -6,8 +6,9 @@ class GoodsController < ApplicationController
 
   def index
     on_home_page = params[:clear] == 'clear' || !params[:sort].nil?
+    explore_mode = !params[:latitude].nil? && !params[:longitude].nil?
     sort = on_home_page ? params[:sort] : session[:sort]
-    if session[:sort] != params[:sort]
+    if session[:sort] != params[:sort] && !explore_mode
       session[:sort] = sort
       redirect_to goods_path(sort: sort)
     end
@@ -22,12 +23,6 @@ class GoodsController < ApplicationController
       goods_map = Goods.explore_goods(latitude, longitude, sort)
       @goods = goods_map[:goods]
     end
-
-    puts '----------------------------------------'
-    @goods.each do |good|
-      puts good.name
-    end
-    puts '----------------------------------------'
 
     # @hash = Gmaps4rails.build_markers(@goods) do |good, marker|
     #   marker.lat good.latitude
