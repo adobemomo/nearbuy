@@ -1,13 +1,13 @@
-<div class="row-fluid" onload="getLocation()">
+<div class="row-fluid">
   <div class="col-md-6">
     <div id="map" style='width: 100%; height: 600px;'></div>
   </div>
   <div class="col-md-6">
     <%# if user_signed_in? %>
-      <%#= link_to new_good_path do %>
-<!--        <button class="btn btn-primary">Add new goods</button>-->
-      <%# end %>
-<!--      <hr>-->
+    <%#= link_to new_good_path do %>
+    <!--        <button class="btn btn-primary">Add new goods</button>-->
+    <%# end %>
+    <!--      <hr>-->
     <%# end %>
 
     <button class="" id="loc" onclick="explore_mode()">
@@ -32,16 +32,12 @@
       </button>
     <% end %>
 
-    <button >
-      <a id="get_by_location_button">Get By Location</a>
-    </button>
-    <p id="demo"></p>
-    <p>Search for specific items:</p>  
+    <p>Search for specific items:</p>
     <input class="form-control" id="myInput" type="text" placeholder="Item Name...">
     <br>
 
     <ul class="list-group" id="myList">
-      
+
       <% @goods.each do |good| %>
         <li class="list-group-item">
           <div class="row-fluid">
@@ -57,132 +53,100 @@
 
 <% content_for(:after_js) do %>
   <script type="text/javascript">
-    var handler = Gmaps.build('Google');
-    handler.buildMap({ internal: { id: 'map' } }, function(){
-      markers = handler.addMarkers(<%= raw @hash.to_json %>);
-      handler.bounds.extendWith(markers);
-      handler.fitMapToBounds();
-      if (markers.length == 0) {
-        handler.getMap().setZoom(2);
-      } else if (markers.length == 1) {
-        handler.getMap().setZoom(14);
-      }
-    });
-
-    // let map, infoWindow;
-    // infoWindow = new google.maps.InfoWindow();
-    //
-    // // const locationButton = document.createElement("button");
-    // // var MyDiv =document.getElementById("loc");
-    // const locationButton = document.getElementById("loc");
-    // var curPos;
-    //
-    // locationButton.textContent = "Explore";
-    // locationButton.classList.add("custom-map-control-button");
-    //
-    // locationButton.addEventListener("click", () => {
-    //     // Try HTML5 geolocation.
-    //     if (navigator.geolocation) {
-    //         navigator.geolocation.getCurrentPosition(
-    //             (position) => {
-    //                 curPos = {
-    //                     lat: position.coords.latitude,
-    //                     lng: position.coords.longitude,
-    //                 };
-    //
-    //                 // infoWindow.setPosition(pos);
-    //                 // infoWindow.setContent("Location found.");
-    //                 // infoWindow.open(map);
-    //                 // map.setCenter(pos);
-    //                 console.log(curPos)
-    //             },
-    //             () => {
-    //                 handleLocationError(true, infoWindow, handler.getCenter());
-    //             }
-    //         );
-    //     } else {
-    //         // Browser doesn't support Geolocation
-    //         handleLocationError(false, infoWindow, handler.getCenter());
-    //     }
-    // });
-
-    // MyDiv.appendChild(locationButton);
-
-    // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    //     infoWindow.setPosition(pos);
-    //     infoWindow.setContent(
-    //         browserHasGeolocation
-    //             ? "Error: The Geolocation service failed."
-    //             : "Error: Your browser doesn't support geolocation."
-    //     );
-    //     // infoWindow.open(map);
-    // }
-
-
-  </script>
-
-  <script>
-    function explore_mode() {
-        let curPos;
-
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    curPos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude,
-                    };
-                    console.log(curPos)
-                    window.location.href = '/goods?latitude=' + curPos.lat + '&longitude=' + curPos.lng
-                }
-            );
-        }
-    }
-  </script>
-
-
-  <script>
-    $(document).ready(function(){
-      $("#myInput").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#myList li").filter(function() {
-          $(this).toggle($(this).find('h2:first').text().toLowerCase().indexOf(value) > -1)
-        });
-        
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: { id: 'map' } }, function(){
+          markers = handler.addMarkers(<%= raw @hash.to_json %>);
+          handler.bounds.extendWith(markers);
+          handler.fitMapToBounds();
+          if (markers.length == 0) {
+              handler.getMap().setZoom(2);
+          } else if (markers.length == 1) {
+              handler.getMap().setZoom(14);
+          }
       });
-    });
+
+      // let map, infoWindow;
+      // infoWindow = new google.maps.InfoWindow();
+      //
+      // // const locationButton = document.createElement("button");
+      // // var MyDiv =document.getElementById("loc");
+      // const locationButton = document.getElementById("loc");
+      // var curPos;
+      //
+      // locationButton.textContent = "Explore";
+      // locationButton.classList.add("custom-map-control-button");
+      //
+      // locationButton.addEventListener("click", () => {
+      //     // Try HTML5 geolocation.
+      //     if (navigator.geolocation) {
+      //         navigator.geolocation.getCurrentPosition(
+      //             (position) => {
+      //                 curPos = {
+      //                     lat: position.coords.latitude,
+      //                     lng: position.coords.longitude,
+      //                 };
+      //
+      //                 // infoWindow.setPosition(pos);
+      //                 // infoWindow.setContent("Location found.");
+      //                 // infoWindow.open(map);
+      //                 // map.setCenter(pos);
+      //                 console.log(curPos)
+      //             },
+      //             () => {
+      //                 handleLocationError(true, infoWindow, handler.getCenter());
+      //             }
+      //         );
+      //     } else {
+      //         // Browser doesn't support Geolocation
+      //         handleLocationError(false, infoWindow, handler.getCenter());
+      //     }
+      // });
+
+      // MyDiv.appendChild(locationButton);
+
+      // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+      //     infoWindow.setPosition(pos);
+      //     infoWindow.setContent(
+      //         browserHasGeolocation
+      //             ? "Error: The Geolocation service failed."
+      //             : "Error: Your browser doesn't support geolocation."
+      //     );
+      //     // infoWindow.open(map);
+      // }
+
+
   </script>
+
   <script>
-    function getLocation() {
-        console.log("getLocation");
-        if (navigator.geolocation) {
-            console.log("geolocation");
-            navigator.geolocation.getCurrentPosition(setButton, showError);
-        } else {
-            console.log("no geolocation");
-          setButtonDefault();
-        }
-    }
+      function explore_mode() {
+          let curPos;
 
-    function showError(positionError) {
-        console.log(positionError);
-        setButtonDefault();
-    }
-
-
-    function setButton(position){
-        console.log("setButton");
-        $('#get_by_location_button').attr('href', '/goods?longitude=' + position.coords.longitude + '&latitude=' + position.coords.latitude);
-    }
-    function setButtonDefault(){
-        $('#get_by_location_button').attr('href', '/goods?longitude=&latitude=');
-    }
-
-    function sendLonLat(){
-
-    }
-    $(document).ready(function(){
-        getLocation();
-    });
+          if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(
+                  (position) => {
+                      curPos = {
+                          lat: position.coords.latitude,
+                          lng: position.coords.longitude,
+                      };
+                      console.log(curPos)
+                      window.location.href = '/goods?latitude=' + curPos.lat + '&longitude=' + curPos.lng
+                  }
+              );
+          }
+      }
   </script>
+
+
+  <script>
+      $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+              var value = $(this).val().toLowerCase();
+              $("#myList li").filter(function() {
+                  $(this).toggle($(this).find('h2:first').text().toLowerCase().indexOf(value) > -1)
+              });
+
+          });
+      });
+  </script>
+
 <% end %>
