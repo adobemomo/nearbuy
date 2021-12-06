@@ -32,24 +32,36 @@
       </button>
     <% end %>
 
-    <p>Search for specific items:</p>
+
+    <p>Search for specific items:</p>  
     <input class="form-control" id="myInput" type="text" placeholder="Item Name...">
     <br>
-
-    <ul class="list-group" id="myList">
-
-      <% @goods.each do |good| %>
-        <li class="list-group-item">
+    <div id="ulContainer">
+      <ul class="list-group" id="myList">
+      <%for i in 0..@goods.length-1 do %>
+        <%good = @goods[i]%>
+        <li class="list-group-item" style="<%= i>3 ? "display: None" : ""%>">
           <div class="row-fluid">
             <h2><%= link_to good.name, good %></h2>
             <p><%= good.address %></p>
           </div>
         </li>
       <% end %>
-    </ul>
-
+      </ul>
+    </div>
+    <div style="text-align:center">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center" id = "paginationId">
+          <% for i in 1..(@goods.length/4.0).ceil do%>
+            <li class="page-item" onclick="changePage(<%= i%>)"><a class="page-link" href="#"><%= i%></a></li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
   </div>
 </div>
+
+
 
 <% content_for(:after_js) do %>
   <script type="text/javascript">
@@ -138,15 +150,93 @@
 
 
   <script>
-      $(document).ready(function(){
-          $("#myInput").on("keyup", function() {
-              var value = $(this).val().toLowerCase();
-              $("#myList li").filter(function() {
-                  $(this).toggle($(this).find('h2:first').text().toLowerCase().indexOf(value) > -1)
-              });
+    
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {                  
 
-          });
+        var value = $(this).val().toLowerCase();
+
+        $('#myList').empty()
+
+        <%for i in 0..@goods.length-1 do %>
+          <%good = @goods[i]%>
+          var node_a = document.createElement('a')
+          node_a.href = "/goods/<%= good.id%>"
+          node_a.innerHTML = "<%=good.name%>"
+
+          var node_h2 = document.createElement('h2')
+          node_h2.appendChild(node_a)
+
+          var node_p = document.createElement('p')
+          node_p.innerHTML = "<%=good.address%>"
+
+          var node_div = document.createElement('div')
+          node_div.classList.add("row-fluid")
+          node_div.appendChild(node_h2)
+          node_div.appendChild(node_p)
+
+          var node_li = document.createElement('li')
+          node_li.classList.add("list-group-item")
+          node_li.appendChild(node_div)
+
+          document.getElementById("myList").appendChild(node_li)
+        <% end %>
+
+        $('#myList').children().each(function () {
+            $(this).show();
+        });
+
+
+        $('#myList').children().each(function () {
+            if ($(this).find('h2:first').text().toLowerCase().indexOf(value) <= -1) {
+              $(this).remove();
+            }
+        });
+
+        let lst = document.getElementById("myList")
+
+        for(var i=0, len = lst.childElementCount ; i < len; ++i){
+            if (i<4) {
+              lst.children[i].style.display = null
+            } else {
+              lst.children[i].style.display = "none"
+            }
+        }
+
+        $('#paginationId').empty()
+        
+
+        let pag = document.getElementById("paginationId")
+        for(var i=0; i<Math.ceil(lst.childElementCount/4.0); ++i) {
+            var node_a = document.createElement('a')
+            node_a.classList.add("page-link")
+            node_a.href = "#"
+            node_a.innerHTML = (i+1).toString()
+            var node_li = document.createElement('li')
+            node_li.classList.add("page-item")
+            node_li.setAttribute("onclick","changePage("+(i+1).toString()+")");
+            node_li.appendChild(node_a)
+            pag.appendChild(node_li)
+        }
       });
-  </script>
-
+    });
+  </script>  
 <% end %>
+
+
+<script>
+    function changePage(page) {
+      let lst = document.getElementById("myList")
+
+      var children = lst.children;
+      for (var i = 0; i < children.length; i++) {
+        var tableChild = children[i];
+
+        if (i >= 4*(page-1) && i <= 4*page-1) {
+            tableChild.style.display = null;
+        } else {
+            tableChild.style.display = "none";
+        }
+      }
+    }
+</script>
