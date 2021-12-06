@@ -6,19 +6,45 @@ class GoodsController < ApplicationController
 
   def index
     on_home_page = params[:clear] == 'clear' || !params[:sort].nil?
+    explore_mode = !params[:latitude].nil? && !params[:longitude].nil?
     sort = on_home_page ? params[:sort] : session[:sort]
-    if session[:sort] != params[:sort]
+    if session[:sort] != params[:sort] && !explore_mode
       session[:sort] = sort
       redirect_to goods_path(sort: sort)
     end
 
+    latitude = params[:latitude]
+    longitude = params[:longitude]
+
     @goods = Goods.all_goods.order(sort)
 
-    @hash = Gmaps4rails.build_markers(@goods) do |good, marker|
-      marker.lat good.latitude
-      marker.lng good.longitude
-      marker.infowindow render_to_string(partial: "/goods/map_box", locals: { good: good })
+    goods_map = nil
+    if !latitude.nil? && !longitude.nil?
+      goods_map = Goods.explore_goods(latitude, longitude, sort)
+      @goods = goods_map[:goods]
     end
+
+    # @hash = Gmaps4rails.build_markers(@goods) do |good, marker|
+    #   marker.lat good.latitude
+    #   marker.lng good.longitude
+    #   marker.infowindow render_to_string(partial: "/goods/map_box", locals: { good: good })
+    # end
+
+    @hash = if !latitude.nil? && !longitude.nil?
+              Gmaps4rails.build_markers(@goods) do |good, marker|
+                (0..goods_map[good.id][:lats].length-1).each do |i|
+                  marker.lat goods_map[good.id][:lats][i]
+                  marker.lng goods_map[good.id][:longs][i]
+                  marker.infowindow render_to_string(partial: "/goods/map_box", locals: { good: good })
+                end
+              end
+            else
+              Gmaps4rails.build_markers(@goods) do |good, marker|
+                marker.lat good.latitude
+                marker.lng good.longitude
+                marker.infowindow render_to_string(partial: "/goods/map_box", locals: { good: good })
+              end
+            end
   end
 
   def show; end
@@ -28,8 +54,18 @@ class GoodsController < ApplicationController
   end
 
   def create
+    address1 = goods_params[:address1]
+    address2 = goods_params[:address2]
+
     goods_param = goods_params
     goods_param[:user_name] = current_user.username
+    if address1 != nil
+      goods_param[:latitude1], goods_param[:longitude1] = Geocoder.coordinates(address1)
+    end
+
+    if address2 != nil
+      goods_param[:latitude2], goods_param[:longitude2] = Geocoder.coordinates(address2)
+    end
 
     @good = Goods.new(goods_param)
 
@@ -40,14 +76,26 @@ class GoodsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    puts 'edit'
+    puts 'goods params:' + params.to_s
+  end
 
   # def delete
   #   @good = Goods.find(params[:id])
   # end
 
   def update
-    if @good.update(goods_params)
+    goods_param = goods_params
+    if goods_param[:address1] != "" and goods_param[:address1] != @good.address1
+      goods_param[:latitude1], goods_param[:longitude1] = Geocoder.coordinates(goods_param[:address1])
+    end
+
+    if goods_param[:address2] != "" and goods_param[:address2] != @good.address2
+      goods_param[:latitude2], goods_param[:longitude2] = Geocoder.coordinates(goods_param[:address2])
+    end
+
+    if @good.update(goods_param)
       redirect_to user_goods_list_path, notice: 'Goods was successfully updated.'
     else
       render action: 'edit'
@@ -69,7 +117,7 @@ class GoodsController < ApplicationController
   end
 
   def goods_params
-    params.require(:goods).permit(:name, :address)
+    params.require(:goods).permit(:name, :address, :address1, :address2)
   end
 
   # def respond_destroy_success
