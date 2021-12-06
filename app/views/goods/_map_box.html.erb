@@ -1,5 +1,11 @@
 <div class="map_box">
   <h3><%= good.name %></h3>
   <p><%= good.address %></p>
+  <% if good.address1 != "" %>
+    <p><%= good.address1 %></p>
+  <% end %>
+  <% if good.address2 != "" %>
+    <p><%= good.address2 %></p>
+  <% end %>
   <%= link_to "Details", good_path(good), target: :blank, class: "btn btn-warning" %>
 </div>
