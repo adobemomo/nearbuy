@@ -45,7 +45,6 @@ class GoodsController < ApplicationController
                 marker.infowindow render_to_string(partial: "/goods/map_box", locals: { good: good })
               end
             end
-
   end
 
   def show; end
@@ -55,8 +54,18 @@ class GoodsController < ApplicationController
   end
 
   def create
+    address1 = goods_params[:address1]
+    address2 = goods_params[:address2]
+
     goods_param = goods_params
     goods_param[:user_name] = current_user.username
+    if address1 != nil
+      goods_param[:latitude1], goods_param[:longitude1] = Geocoder.coordinates(address1)
+    end
+
+    if address2 != nil
+      goods_param[:latitude2], goods_param[:longitude2] = Geocoder.coordinates(address2)
+    end
 
     @good = Goods.new(goods_param)
 
@@ -67,14 +76,26 @@ class GoodsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    puts 'edit'
+    puts 'goods params:' + params.to_s
+  end
 
   # def delete
   #   @good = Goods.find(params[:id])
   # end
 
   def update
-    if @good.update(goods_params)
+    goods_param = goods_params
+    if goods_param[:address1] != "" and goods_param[:address1] != @good.address1
+      goods_param[:latitude1], goods_param[:longitude1] = Geocoder.coordinates(goods_param[:address1])
+    end
+
+    if goods_param[:address2] != "" and goods_param[:address2] != @good.address2
+      goods_param[:latitude2], goods_param[:longitude2] = Geocoder.coordinates(goods_param[:address2])
+    end
+
+    if @good.update(goods_param)
       redirect_to user_goods_list_path, notice: 'Goods was successfully updated.'
     else
       render action: 'edit'
@@ -96,7 +117,7 @@ class GoodsController < ApplicationController
   end
 
   def goods_params
-    params.require(:goods).permit(:name, :address)
+    params.require(:goods).permit(:name, :address, :address1, :address2)
   end
 
   # def respond_destroy_success

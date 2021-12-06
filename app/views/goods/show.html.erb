@@ -4,13 +4,20 @@
       <h2><%= @good.name %></h2>
       <p><%= @good.address %></p>
       <p><%= @good.description %></p>
-<!--      <p><%#= @good.user_name %></p>-->
-      <p><%= link_to "Seller: #{@good.user_name}", user_profile_path(@good.user_name) %></p>
-<!--      <p>Latitude: <%#= @good.latitude %></p>-->
-<!--      <p>Longitude: <%#= @good.longitude %></p>-->
+      <br>
+      <p>preferred locations</p>
+      <ul>
+        <li><%= @good.address %></li>
+        <% if @good.address1 != "" %>
+        <li><%= @good.address1 %></li>
+        <% end %>
+        <% if @good.address2 != "" %>
+          <li><%= @good.address2 %></li>
+        <% end %>
+      </ul>
 
-      <%#= link_to "Edit", edit_good_path(@good), class: "btn btn-primary" %>
-<!--      or-->
+      <p><%= link_to "Seller: #{@good.user_name}", user_profile_path(@good.user_name) %></p>
+
       <%= link_to "Back", goods_path %>
     </div>
 
