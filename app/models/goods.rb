@@ -41,7 +41,7 @@ class Goods < ActiveRecord::Base
         puts result.to_i
         next unless result.to_i < 1000
 
-        unless explore.key?(good)
+        unless explore.key?(good.id)
           explore[good.id] = {
             'lats': [],
             'longs': []
