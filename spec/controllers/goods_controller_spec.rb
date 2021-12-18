@@ -14,7 +14,7 @@ RSpec.describe GoodsController, type: :controller do
     Goods.create(name: "Desktop table", address: "2393 Broadway, New York, NY 10024", user_name: "lol", description: "good")
     Goods.create(name: "nintendo switch", address: "2396 Broadway, New York, NY 10024", user_name: "lol", description: "cool")
     Goods.create(name: "chair", address: "2400 Broadway, New York, NY 10024", user_name: "lol", description: "great")
-    Goods.create(name: "pot", address: "2404 Broadway, New York, NY 10024", address1: "2408 Broadway, New York, NY 10024", address2: "2412 Broadway, New York, NY 10024", user_name: "lol", description: "excellent")
+    Goods.create(name: "pot", address: "2404 Broadway, New York, NY 10024", address1: "2408 Broadway, New York, NY 10024", latitude1: 40.47, longitude1: -73.58, address2: "2412 Broadway, New York, NY 10024", latitude2: 40.48, longitude2: -73.59, user_name: "lol", description: "excellent")
     User.create(email: 'test@gmail.com', address: 'nyc', first_name: 'aa', last_name: 'bb', username: 'lol', password: '123456', password_confirmation: '123456')
   end
 
@@ -39,21 +39,40 @@ RSpec.describe GoodsController, type: :controller do
       get :index, {params: {sort: 'name', clear: 'clear'}}
       expect(response).to redirect_to goods_path(sort: 'name')
     end
+    it 'show goods order by update time' do
+      get :index, {params: {sort: 'update_time'}}
+
+      ordered_goods = @controller.instance_variable_get(:@goods)
+      expect(ordered_goods[0].name).to eq 'pot'
+      expect(ordered_goods[1].name).to eq 'chair'
+      expect(ordered_goods[ordered_goods.length - 1].name).to eq 'Switch'
+
+    end
     it 'explore mode' do
       get :index, {params: {latitude: 40.7909156, longitude: -73.9726773}}
 
-      # expect(response).to redirect_to goods_path(sort: 'name')
+      explored_goods = @controller.instance_variable_get(:@goods)
+      # explored_goods.each do |good|
+      #   puts good.name
+      # end
+      expect(explored_goods.length).to eq 6
+      expect(explored_goods[0].name).to eq 'Switch'
     end
   end
 
   describe 'creates' do
     it 'goods with valid parameters' do
       post :create, { goods: { name: 'Macbook Pro',
-                               address: '2380 Broadway, New York, NY 10024' } }
+                               address: '2380 Broadway, New York, NY 10024',
+                               address1: '2381 Broadway, New York, NY 10024',
+                               address2: '2382 Broadway, New York, NY 10024'} }
       expect(response).to redirect_to user_goods_list_path
       expect(flash[:notice]).to match(/Macbook Pro was successfully created./)
       good = Goods.find_by(name: 'Macbook Pro')
       user = User.find_by(email: 'test@gmail.com')
+      expect(good.address).to eq '2380 Broadway, New York, NY 10024'
+      expect(good.address1).to eq '2381 Broadway, New York, NY 10024'
+      expect(good.address2).to eq '2382 Broadway, New York, NY 10024'
       expect(good.user_name).to eq user.username
       good.destroy
     end
@@ -72,11 +91,15 @@ RSpec.describe GoodsController, type: :controller do
     it 'update goods' do
       good = Goods.create(name: 'PS5',
                           address: '2480 Broadway, New York, NY 10024')
-      patch :update, { id: good.id, goods:         { address: '2389 Broadway, New York, NY 10024' }
+      patch :update, { id: good.id, goods:         { address: '2389 Broadway, New York, NY 10024',
+                                                     address1: '2390 Broadway, New York, NY 10024',
+                                                     address2: '2391 Broadway, New York, NY 10024' }
       }
 
       expect(response).to redirect_to user_goods_list_path
       expect(Goods.find_by(id: good.id).address).to match(/2389 Broadway, New York, NY 10024/)
+      expect(Goods.find_by(id: good.id).address1).to match(/2390 Broadway, New York, NY 10024/)
+      expect(Goods.find_by(id: good.id).address2).to match(/2391 Broadway, New York, NY 10024/)
       expect(flash[:notice]).to match(/Goods was successfully updated./)
       good.destroy
     end

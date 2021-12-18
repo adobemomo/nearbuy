@@ -83,8 +83,6 @@ class GoodsController < ApplicationController
   end
 
   def edit
-    puts 'edit'
-    puts 'goods params:' + params.to_s
   end
 
   # def delete
@@ -93,11 +91,11 @@ class GoodsController < ApplicationController
 
   def update
     goods_param = goods_params
-    if goods_param[:address1] != "" and goods_param[:address1] != @good.address1
+    if !goods_param[:address1].nil? and goods_param[:address1] != "" and goods_param[:address1] != @good.address1
       goods_param[:latitude1], goods_param[:longitude1] = Geocoder.coordinates(goods_param[:address1])
     end
 
-    if goods_param[:address2] != "" and goods_param[:address2] != @good.address2
+    if !goods_param[:address2].nil? and goods_param[:address2] != "" and goods_param[:address2] != @good.address2
       goods_param[:latitude2], goods_param[:longitude2] = Geocoder.coordinates(goods_param[:address2])
     end
 
