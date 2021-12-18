@@ -38,7 +38,7 @@ class Goods < ActiveRecord::Base
         lng_sin = Math.sin(lng_diff / 2.0) ** 2
         first = Math.sqrt(lat_sin + Math.cos(lat * 3.1415926 / 180.0) * Math.cos(lats[i] * 3.1415926 / 180.0) * lng_sin)
         result = Math.asin(first) * 2 * 6378137.0
-        puts result.to_i
+
         next unless result.to_i < 1000
 
         unless explore.key?(good.id)
