@@ -42,11 +42,21 @@ RSpec.describe GoodsController, type: :controller do
     it 'show goods order by update time' do
       get :index, {params: {sort: 'update_time'}}
 
+      ordered_goods = @controller.instance_variable_get(:@goods)
+      expect(ordered_goods[0].name).to eq 'pot'
+      expect(ordered_goods[1].name).to eq 'chair'
+      expect(ordered_goods[ordered_goods.length - 1].name).to eq 'Switch'
+
     end
     it 'explore mode' do
       get :index, {params: {latitude: 40.7909156, longitude: -73.9726773}}
 
-      # expect(response).to redirect_to goods_path(sort: 'name')
+      explored_goods = @controller.instance_variable_get(:@goods)
+      # explored_goods.each do |good|
+      #   puts good.name
+      # end
+      expect(explored_goods.length).to eq 6
+      expect(explored_goods[0].name).to eq 'Switch'
     end
   end
 
@@ -60,6 +70,9 @@ RSpec.describe GoodsController, type: :controller do
       expect(flash[:notice]).to match(/Macbook Pro was successfully created./)
       good = Goods.find_by(name: 'Macbook Pro')
       user = User.find_by(email: 'test@gmail.com')
+      expect(good.address).to eq '2380 Broadway, New York, NY 10024'
+      expect(good.address1).to eq '2381 Broadway, New York, NY 10024'
+      expect(good.address2).to eq '2382 Broadway, New York, NY 10024'
       expect(good.user_name).to eq user.username
       good.destroy
     end
@@ -85,6 +98,8 @@ RSpec.describe GoodsController, type: :controller do
 
       expect(response).to redirect_to user_goods_list_path
       expect(Goods.find_by(id: good.id).address).to match(/2389 Broadway, New York, NY 10024/)
+      expect(Goods.find_by(id: good.id).address1).to match(/2390 Broadway, New York, NY 10024/)
+      expect(Goods.find_by(id: good.id).address2).to match(/2391 Broadway, New York, NY 10024/)
       expect(flash[:notice]).to match(/Goods was successfully updated./)
       good.destroy
     end
