@@ -26,5 +26,9 @@ Feature: we can get the information of an user by username and retrieve his/her 
 
   Scenario: retrieve product with specified username
     Given I search the product with username "another"
-    Then the products should contains "full-size mattress,Samsung Phone"
+    Then the products should contain "full-size mattress,Samsung Phone"
+
+  Scenario: explore all products near specified location
+    Given explore all products near "40.80376595,-73.96178430421567"
+    Given explore all products without location
 
