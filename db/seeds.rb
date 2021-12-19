@@ -13,7 +13,7 @@ User.create(email: "john@gmail.com", address: "boston", first_name: "zq", last_n
 Goods.destroy_all
 Goods.create(name: "Apple Watch", address: "1047 Amsterdam Ave, New York, NY 10025", user_name: "lol", description: "apple watch series 7, 99% new", address1: "1048 Amsterdam Ave, New York, NY 10025", address2: "1049 Amsterdam Ave, New York, NY 10025")
 Goods.create(name: "Textbooks", address: "2389 Broadway, New York, NY 10024", user_name: "lol", description: "Calculus")
-Goods.create(name: "Desktop table", address: "2393 Broadway, New York, NY 10024", user_name: "lol", description: "good")
-Goods.create(name: "nintendo switch", address: "2396 Broadway, New York, NY 10024", user_name: "lol", description: "cool")
-Goods.create(name: "chair", address: "2400 Broadway, New York, NY 10024", user_name: "lol", description: "great")
+Goods.create(name: "Desktop table", address: "2393 Broadway, New York, NY 10024", user_name: "lol", description: "good", update_time: "1999-01-01")
+Goods.create(name: "nintendo switch", address: "2396 Broadway, New York, NY 10024", user_name: "lol", description: "cool", update_time: "1999-02-01")
+Goods.create(name: "chair", address: "2400 Broadway, New York, NY 10024", user_name: "lol", description: "great", update_time: "1998-01-01")
 Goods.create(name: "pot", address: "2404 Broadway, New York, NY 10024", user_name: "lol", description: "excellent")

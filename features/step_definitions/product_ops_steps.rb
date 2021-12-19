@@ -19,9 +19,10 @@ Given /the following users exist/ do |users_table|
   end
 end
 
-Then /I should see "(.*)" before "(.*)"/ do |a, b|
- regexp = /^.*#{a}.*#{b}.*$/
-  expect(page.body).to match(regexp)
+Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
+  index_e1 = page.body.index(e1)
+  index_e2 = page.body.index(e2)
+  expect(index_e1).to be < index_e2
 end
 
 Then /I should see "(.*)" on the products list/ do |product_name|

@@ -7,11 +7,11 @@ Feature: user can create account and log in to manage goods
     Background: some products have been added to database
 
         Given the following products exist:
-            | name               | address                                |
-            | iPhone SE2         | 166 W 107th St, New York, NY 10025     |
-            | Desktop table      | 55 St Nicholas Ave, New York, NY 10026 |
-            | full-size mattress | 1220 5th Ave, New York, NY 10029       |
-            | Samsung Phone      | 1030 Amsterdam Ave, New York, NY 10025 |
+            | name               | address                                | user_name |
+            | iPhone SE2         | 166 W 107th St, New York, NY 10025     | test11    |
+            | Desktop table      | 55 St Nicholas Ave, New York, NY 10026 | test11    |
+            | full-size mattress | 1220 5th Ave, New York, NY 10029       | test11    |
+            | Samsung Phone      | 1030 Amsterdam Ave, New York, NY 10025 | test11    |
         And the following users exist:
             | id | email          | address | first_name | last_name | username | password | password_confirmation |
             | 1  | test11@gmail.com | nyc     | Alice      | Brown     | test11     | 123456   | 123456                |
@@ -70,6 +70,18 @@ Feature: user can create account and log in to manage goods
         Then I should be on the Sign In Page
 
     Scenario: View Profile
+        Given I am on the NearBuy home page
+        When I follow "Sign In"
+        Then I should be on the Sign In Page
+        And I fill in "user_email" with "test11@gmail.com"
+        And I fill in "user_password" with "123456"
+        And I press "Log in"
+        When I follow "Profile"
+        Then I should be on the profile page for "test11"
+        And I should see "test11"
+        And I should see "test11@gmail.com"
+    
+    Scenario: View GoodList
         Given I am on the NearBuy home page
         When I follow "Sign In"
         Then I should be on the Sign In Page

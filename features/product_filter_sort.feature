@@ -33,7 +33,7 @@ Feature: show products with sorting and filtering
         Then I should see "Sort By Time"
         When I follow "Sort By Time"
         Then I should be on the NearBuy home page
-        Then I should see "full-size mattress" before "iPhone SE2"
+        Then I should see "iPhone SE2" before "full-size mattress"
 
     Scenario: clear sort status:
         Given I am on the NearBuy home page
