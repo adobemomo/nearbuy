@@ -47,5 +47,4 @@
   - Add access protections on goods
 
 ### Coverage
-  Since Cucumber is basically for testing the controller, and RSpec is for models and database, the coverage for these two tests has no need to be overlapped.
-  Coverages for RSpec and cucumber are close to 100%.
+  Coverage for RSpec is 100% and for Cucumber is above 80%. Some code of models is tested via RSpec but is not covered by Cucumber, since it's not the use case for Cucumber.
