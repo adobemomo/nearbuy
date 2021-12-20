@@ -47,4 +47,4 @@
   - Add access protections on goods
 
 ### Coverage
-  Coverage for RSpec is 100% and for Cucumber is above 80%. Some code of models is tested via RSpec but is not covered by Cucumber, since it's not the use case for Cucumber.
+  Coverage for RSpec is 100% and for Cucumber is above 80%. All code has been tested.
