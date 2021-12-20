@@ -31,7 +31,7 @@ Feature: operations on product include: add, edit, delete
     When I follow "Add new goods"
     Then I should be on the create new product page
     When I fill in "Name" with "Samsung S21U 128G"
-    And I fill in "Address" with "2880 Broadway, New York, NY 10025"
+    And I fill in "goods[address]" with "2880 Broadway, New York, NY 10025"
     And I press "GO"
     Then I should be on the Goods List page
     And I should see "Samsung S21U 128G" on the products list
